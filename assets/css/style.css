@@ -1,0 +1,30 @@
+header {
+    background-color: #585858;
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+.btn {
+    background-color: blue;
+    color: white;
+}
+
+.btn:hover {
+    color: green;
+}
+
+p {
+    margin: 0;
+    padding: 10px 20px;
+    font-size: 125%;
+}
+
+.day-color {
+    background-color: blue;
+    color: white;
+}
+
+.container {
+    max-width: 2560px;
+}
