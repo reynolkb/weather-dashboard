@@ -1,13 +1,12 @@
+.container {
+    max-width: 2560px;
+}
+
 header {
     background-color: #585858;
     padding: 10px;
     color: white;
     text-align: center;
-}
-
-h4 {
-    padding: 10px;
-    border: solid grey;
 }
 
 p {
@@ -16,15 +15,20 @@ p {
     font-size: 125%;
 }
 
+/* saved cities styling */
+h4 {
+    padding: 10px;
+    border: solid grey;
+    margin: 10px 0;
+}
+
+/* 5-day forecast color */
 .day-color {
     background-color: blue;
     color: white;
 }
 
-.container {
-    max-width: 2560px;
-}
-
+/* UV Index classes */
 .favorable {
     background-color: green;
     color: white;

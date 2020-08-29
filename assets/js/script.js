@@ -10,17 +10,19 @@ var formSubmitHandler = function (event) {
     city = city.toLowerCase();
 
     if (city) {
-        //test 
+        // if user has searched for city before return true
         var foundCity = cities.find(function (ele) {
             if (ele === city) {
                 return true;
             }
         });
 
+        // if the user has searched for the city before alert them
         if (foundCity) {
             alert("This city is already in your search history.");
-        } else {
-            // test
+        }
+        // if not, proceed with creating the dashboard
+        else {
             getCityWeather(city);
             cities.push(city);
             saveCity(cities);
@@ -69,6 +71,7 @@ var loadCity = function () {
     }
 }
 
+// get city weather info from API
 var getCityWeather = function (city) {
     var split = city.split(", ");
 
@@ -245,6 +248,7 @@ var displayWeather = function (cityState, weather) {
     }
 }
 
+// clear local storage and refresh page
 var clearCitiesHandler = function () {
     localStorage.clear();
     location.reload();
