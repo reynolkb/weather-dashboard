@@ -5,13 +5,9 @@ header {
     text-align: center;
 }
 
-.btn {
-    background-color: blue;
-    color: white;
-}
-
-.btn:hover {
-    color: green;
+h4 {
+    padding: 10px;
+    border: solid grey;
 }
 
 p {

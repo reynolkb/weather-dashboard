@@ -1,17 +1,71 @@
 var userFormEl = document.getElementById("city-form");
+var clearCities = document.getElementById("clear-cities");
 var cityInputEl = document.getElementById("city");
+var cities = [];
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
 
     var city = cityInputEl.value.trim();
-    console.log(city);
+    city = city.toLowerCase();
 
     if (city) {
-        getCityWeather(city);
-        cityInputEl.value = "";
+        //test 
+        var foundCity = cities.find(function (ele) {
+            if (ele === city) {
+                return true;
+            }
+        });
+
+        if (foundCity) {
+            alert("This city is already in your search history.");
+        } else {
+            // test
+            getCityWeather(city);
+            cities.push(city);
+            saveCity(cities);
+            cityInputEl.value = "";
+
+            // each time a city is typed, show it below the search
+            let left = document.getElementById("left");
+            let savedCity = document.createElement("h4");
+            savedCity.id = city;
+            savedCity.textContent = city;
+            savedCity.addEventListener("click", function () {
+                getCityWeather(city);
+            });
+
+            left.appendChild(savedCity);
+        }
     } else {
         alert("Please enter a city.");
+    }
+}
+
+// save off to local storage
+var saveCity = function (cities) {
+    localStorage.setItem("cities", JSON.stringify(cities));
+}
+
+// load from local storage
+var loadCity = function () {
+
+    if (localStorage.length === 0) {
+        console.log("there is nothing in local storage");
+    } else {
+        cities = JSON.parse(localStorage.getItem("cities"));
+
+        for (let i = 0; i < cities.length; i++) {
+            let left = document.getElementById("left");
+            let savedCity = document.createElement("h4");
+            savedCity.id = cities[i];
+            savedCity.textContent = cities[i];
+            savedCity.addEventListener("click", function () {
+                getCityWeather(cities[i]);
+            })
+
+            left.appendChild(savedCity);
+        }
     }
 }
 
@@ -19,7 +73,6 @@ var getCityWeather = function (city) {
     var split = city.split(", ");
 
     var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + split[0] + "," + split[1] + ",us&APPID=9bd97a1e4e2ce11a400f45a23f05b226";
-    console.log(apiUrl);
 
     fetch(apiUrl)
         .then(function (response) {
@@ -100,8 +153,6 @@ var displayWeather = function (cityState, weather) {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    console.log(data);
-
                     // post UV index
                     var uvIndexValue = data.value;
 
@@ -194,4 +245,11 @@ var displayWeather = function (cityState, weather) {
     }
 }
 
+var clearCitiesHandler = function () {
+    localStorage.clear();
+    location.reload();
+}
+
+loadCity();
 userFormEl.addEventListener("submit", formSubmitHandler);
+clearCities.addEventListener("click", clearCitiesHandler);
