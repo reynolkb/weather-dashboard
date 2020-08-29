@@ -37,6 +37,10 @@ var getCityWeather = function (city) {
         });
 }
 
+var getCityUV = function (lon, lat) {
+    var apiUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=9bd97a1e4e2ce11a400f45a23f05b226&lat=" + lat + "&lon=" + lon;
+}
+
 var displayWeather = function (cityState, weather) {
     var weatherContainer = document.getElementById("weather-container");
 
@@ -124,7 +128,7 @@ var displayWeather = function (cityState, weather) {
 
         // create container for each day in 5-day forecast
         let dayCol = document.createElement("div");
-        dayCol.classList = "col-2 day-color";
+        dayCol.classList = "col-xl-2 col-lg-6 col-12 day-color";
         forecastRow.appendChild(dayCol);
 
         // create date header
