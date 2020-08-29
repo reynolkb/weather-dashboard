@@ -28,3 +28,21 @@ p {
 .container {
     max-width: 2560px;
 }
+
+.favorable {
+    background-color: green;
+    color: white;
+    padding: 3px;
+}
+
+.moderate {
+    background-color: yellow;
+    color: white;
+    padding: 3px;
+}
+
+.severe {
+    background-color: red;
+    color: white;
+    padding: 3px;
+}

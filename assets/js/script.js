@@ -37,10 +37,6 @@ var getCityWeather = function (city) {
         });
 }
 
-var getCityUV = function (lon, lat) {
-    var apiUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=9bd97a1e4e2ce11a400f45a23f05b226&lat=" + lat + "&lon=" + lon;
-}
-
 var displayWeather = function (cityState, weather) {
     var weatherContainer = document.getElementById("weather-container");
 
@@ -90,10 +86,46 @@ var displayWeather = function (cityState, weather) {
     todayHumidity.textContent = "Humidity: " + weather.list[0].main.humidity + "%";
     todayCard.appendChild(todayHumidity);
 
-    //today's wind speed
+    // today's wind speed
     var todayWind = document.createElement("p");
     todayWind.textContent = "Wind Speed: " + weather.list[0].wind.speed + " MPH";
     todayCard.appendChild(todayWind);
+
+    // fetch and post UV index
+    var lat = weather.city.coord.lat;
+    var lon = weather.city.coord.lon;
+    var apiUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=9bd97a1e4e2ce11a400f45a23f05b226&lat=" + lat + "&lon=" + lon;
+
+    fetch(apiUrl)
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log(data);
+
+                    // post UV index
+                    var uvIndexValue = data.value;
+
+                    var uvIndex = document.createElement("p");
+                    var uvSpan = document.createElement("span");
+                    uvSpan.textContent = uvIndexValue;
+                    if (uvIndexValue < 4) {
+                        uvSpan.classList = "favorable";
+                    } else if (uvIndexValue < 7) {
+                        uvSpan.classList = "moderate";
+                    } else {
+                        uvSpan.classList = "severe"
+                    }
+                    uvIndex.textContent = "UV Index: ";
+                    uvIndex.appendChild(uvSpan);
+                    todayCard.appendChild(uvIndex);
+                });
+            } else {
+                alert("Error: " + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            alert("Unable to connect to OpenWeather");
+        });
 
     // --------------- create 5-day weather card ---------------
     // parent card element
