@@ -88,9 +88,9 @@ var getCityWeather = function (city) {
                 alert("Error: " + response.statusText);
             }
         })
-        .catch(function (error) {
-            alert("Unable to connect to OpenWeather");
-        });
+    // .catch(function (error) {
+    //     alert("Unable to connect to OpenWeather");
+    // });
 }
 
 var displayWeather = function (cityState, weather) {
