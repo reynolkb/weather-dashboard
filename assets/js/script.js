@@ -24,20 +24,6 @@ var formSubmitHandler = function (event) {
         // if not, proceed with creating the dashboard
         else {
             getCityWeather(city);
-            cities.push(city);
-            saveCity(cities);
-            cityInputEl.value = "";
-
-            // each time a city is typed, show it below the search
-            let left = document.getElementById("left");
-            let savedCity = document.createElement("h4");
-            savedCity.id = city;
-            savedCity.textContent = city;
-            savedCity.addEventListener("click", function () {
-                getCityWeather(city);
-            });
-
-            left.appendChild(savedCity);
         }
     } else {
         alert("Please enter a city.");
@@ -82,12 +68,31 @@ var getCityWeather = function (city) {
             if (response.ok) {
                 response.json().then(function (data) {
                     console.log(data);
+
+                    cities.push(city);
+                    saveCity(cities);
+                    cityInputEl.value = "";
+
+                    // each time a city is typed, show it below the search
+                    let left = document.getElementById("left");
+                    let savedCity = document.createElement("h4");
+                    savedCity.id = city;
+                    savedCity.textContent = city;
+                    savedCity.addEventListener("click", function () {
+                        getCityWeather(city);
+                    });
+
+                    left.appendChild(savedCity);
+
                     displayWeather(city, data);
+
                 });
             } else {
                 alert("Error: " + response.statusText);
+                cityInputEl.value = "";
             }
         })
+    // commented out because it was throwing an error on github pages when there wasn't one
     // .catch(function (error) {
     //     alert("Unable to connect to OpenWeather");
     // });
