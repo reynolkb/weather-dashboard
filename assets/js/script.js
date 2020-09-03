@@ -69,6 +69,13 @@ var getCityWeather = function (city) {
                 response.json().then(function (data) {
                     console.log(data);
 
+                    // if the city is already in the cities array, only return the wather and don't push it to the array.
+                    if (cities.includes(city)) {
+                        displayWeather(city, data);
+                        return;
+                    }
+
+                    // else push it to the array and save it to local storage
                     cities.push(city);
                     saveCity(cities);
                     cityInputEl.value = "";
@@ -85,7 +92,6 @@ var getCityWeather = function (city) {
                     left.appendChild(savedCity);
 
                     displayWeather(city, data);
-
                 });
             } else {
                 alert("Error: " + response.statusText);
