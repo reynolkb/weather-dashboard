@@ -215,7 +215,7 @@ var displayWeather = function (cityState, weather) {
     forecastContainer.appendChild(forecastRow);
 
     // create each forecast day
-    for (let i = 1; i < 41; i = i + 8) {
+    for (let i = 7; i < 40; i = i + 8) {
         // format date like above
         let forecastDate = weather.list[i].dt_txt;
         forecastDate = forecastDate.split(" ");
