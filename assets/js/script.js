@@ -98,10 +98,10 @@ var getCityWeather = function (city) {
                 cityInputEl.value = "";
             }
         })
-    // commented out because it was throwing an error on github pages when there wasn't one
-    // .catch(function (error) {
-    //     alert("Unable to connect to OpenWeather");
-    // });
+        // commented out because it was throwing an error on github pages when there wasn't one
+        .catch(function (error) {
+            alert("Unable to connect to OpenWeather");
+        });
 }
 
 var displayWeather = function (cityState, weather) {
@@ -161,7 +161,7 @@ var displayWeather = function (cityState, weather) {
     // fetch and post UV index
     var lat = weather.city.coord.lat;
     var lon = weather.city.coord.lon;
-    var apiUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=9bd97a1e4e2ce11a400f45a23f05b226&lat=" + lat + "&lon=" + lon;
+    var apiUrl = "https://api.openweathermap.org/data/2.5/uvi?appid=9bd97a1e4e2ce11a400f45a23f05b226&lat=" + lat + "&lon=" + lon;
 
     fetch(apiUrl)
         .then(function (response) {
