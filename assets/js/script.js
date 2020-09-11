@@ -118,7 +118,7 @@ var displayWeather = function (cityState, weather) {
 
     // get weather icon
     var weatherIcon = weather.list[0].weather[0].icon;
-    weatherIcon = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+    weatherIcon = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
     // convert today's temp from Kelvin to Fahrenheit
     var todaysTemp = weather.list[0].main.temp;
