@@ -235,7 +235,7 @@ var displayWeather = function (cityState, weather) {
 
         // create weather icon
         let weatherIcon = weather.list[i].weather[0].icon;
-        weatherIcon = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+        weatherIcon = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
         let weatherIconImage = document.createElement("img");
         weatherIconImage.setAttribute("src", weatherIcon);
