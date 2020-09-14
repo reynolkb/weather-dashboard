@@ -38,7 +38,7 @@ var saveCity = function (cities) {
 // load from local storage
 var loadCity = function () {
 
-    if (localStorage.length === 0) {
+    if (!localStorage.getItem("cities")) {
         console.log("there is nothing in local storage");
     } else {
         cities = JSON.parse(localStorage.getItem("cities"));
