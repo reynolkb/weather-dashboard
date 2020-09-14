@@ -39,7 +39,7 @@ var saveCity = function (cities) {
 var loadCity = function () {
 
     if (!localStorage.getItem("cities")) {
-        console.log("there is nothing in local storage");
+        console.log("there is nothing in the cities local storage");
     } else {
         cities = JSON.parse(localStorage.getItem("cities"));
 
@@ -260,7 +260,7 @@ var displayWeather = function (cityState, weather) {
 
 // clear local storage and refresh page
 var clearCitiesHandler = function () {
-    localStorage.clear();
+    localStorage.removeItem("cities");
     location.reload();
 }
 
