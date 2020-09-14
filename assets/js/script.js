@@ -98,7 +98,6 @@ var getCityWeather = function (city) {
                 cityInputEl.value = "";
             }
         })
-        // commented out because it was throwing an error on github pages when there wasn't one
         .catch(function (error) {
             alert("Unable to connect to OpenWeather");
         });
