@@ -9,24 +9,29 @@ var formSubmitHandler = function (event) {
     var city = cityInputEl.value.trim();
     city = city.toLowerCase();
 
-    if (city) {
-        // if user has searched for city before return true
-        var foundCity = cities.find(function (ele) {
-            if (ele === city) {
-                return true;
-            }
-        });
-
-        // if the user has searched for the city before alert them
-        if (foundCity) {
-            alert("This city is already in your search history.");
-        }
-        // if not, proceed with creating the dashboard
-        else {
-            getCityWeather(city);
-        }
+    if (city.split(",").length > 2 || cityInputEl.value.indexOf("&") > -1) {
+        alert("Please only enter one comma and no & symbols.");
+        cityInputEl.value = "";
     } else {
-        alert("Please enter a city.");
+        if (city) {
+            // if user has searched for city before return true
+            var foundCity = cities.find(function (ele) {
+                if (ele === city) {
+                    return true;
+                }
+            });
+
+            // if the user has searched for the city before alert them
+            if (foundCity) {
+                alert("This city is already in your search history.");
+            }
+            // if not, proceed with creating the dashboard
+            else {
+                getCityWeather(city);
+            }
+        } else {
+            alert("Please enter a city.");
+        }
     }
 }
 
@@ -60,8 +65,10 @@ var loadCity = function () {
 // get city weather info from API
 var getCityWeather = function (city) {
     var split = city.split(", ");
+    var cityString = split[0];
+    var stateString = split[1];
 
-    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + split[0] + "," + split[1] + ",us&APPID=9bd97a1e4e2ce11a400f45a23f05b226";
+    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityString + "," + stateString + ",us&APPID=9bd97a1e4e2ce11a400f45a23f05b226";
 
     fetch(apiUrl)
         .then(function (response) {
