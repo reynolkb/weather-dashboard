@@ -3,6 +3,15 @@ var clearCities = document.getElementById("clear-cities");
 var cityInputEl = document.getElementById("city");
 var cities = [];
 
+var init = function () {
+    if (localStorage.getItem("cities")) {
+        var lastCity = localStorage.getItem("cities");
+        lastCity = JSON.parse(lastCity);
+        lastCity = lastCity[lastCity.length - 1];
+        getCityWeather(lastCity);
+    }
+}
+
 var formSubmitHandler = function (event) {
     event.preventDefault();
 
@@ -272,5 +281,6 @@ var clearCitiesHandler = function () {
 }
 
 loadCity();
+init();
 userFormEl.addEventListener("submit", formSubmitHandler);
 clearCities.addEventListener("click", clearCitiesHandler);
